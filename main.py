@@ -1,4 +1,5 @@
 import tkinter as tk
+from PIL import Image,ImageTk
 
 def open_general():
     general_window = tk.Toplevel(root)
@@ -9,8 +10,8 @@ def open_general():
     general_text = tk.Label(general_window, text="Read the passage below to help you answer the following questions", font=("Helvetica", 13))
     general_text.pack(pady=10)
     general_text = tk.Label(general_window, text=("Geography is all about exploring our world. It looks at the land, weather, and living things,\n as well as how people live on Earth. \n There are two main parts to geography: physical and human."))
-    general_text.pack(pady=10, padx=10)
-    general_button = tk.Button(general_window, text="Close", command=general_window_quiz, bg="#FFA07A", fg="white", font=("Helvetica", 12))
+    general_text.pack(pady=20, padx=10)
+    general_button = tk.Button(general_window, text="Close", command=general_window_quiz, bg="#FFA07A", fg="white", font=("Helvetica", 12), justify="left")
     general_button.pack(pady=20)
 
 def general_window_quiz():
@@ -46,6 +47,8 @@ def open_countries_quiz():
     countries_button = tk.Button(countries_window, text="Close", command=countries_window.destroy, bg="#FFA07A", fg="white", font=("Helvetica", 12))
     countries_button.pack(pady=20)
 
+
+
 root = tk.Tk()
 root.title("Geography Introduction")
 root.geometry("500x500")
@@ -62,5 +65,27 @@ general_button.pack(pady=10)
 
 countries_button = tk.Button(root, text="Countries", command=open_countries, bg="#FFA07A", fg="white", font=("Helvetica", 12))
 countries_button.pack(pady=10)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 root.mainloop()
