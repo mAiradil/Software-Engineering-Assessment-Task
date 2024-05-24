@@ -1,5 +1,15 @@
+from tkinter import Tk, Canvas, StringVar, Label, Radiobutton, Button, messagebox, Frame, ttk
+from random import shuffle
+from tkinter.messagebox import showinfo
 import tkinter as tk
 from PIL import Image,ImageTk
+#This code creates a program with buttons, labels, and images that you can interact with using your mouse.
+import json
+import html
+
+THEME_COLOR = "#375362"
+
+
 
 def open_general():
     general_window = tk.Toplevel(root)
@@ -11,7 +21,7 @@ def open_general():
     general_text.pack(pady=10)
     general_text = tk.Label(general_window, text=("Geography is all about exploring our world. It looks at the land, weather, and living things,\n as well as how people live on Earth. \n There are two main parts to geography: Physical and Human."))
     general_text.pack(pady=0, padx=0)
-    general_button = tk.Button(general_window, text="Close", command=general_window_quiz, bg="#FFA07A", fg="white", font=("Helvetica", 12), justify="left")
+    general_button = tk.Button(general_window, text="Open", command=general_window_quiz, bg="#FFA07A", fg="white", font=("Helvetica", 12), justify="left")
     general_button.pack(pady=20)
 
 def general_window_quiz():
