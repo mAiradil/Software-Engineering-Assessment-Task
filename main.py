@@ -7,95 +7,55 @@ from PIL import Image,ImageTk
 import json
 import html
 
-THEME_COLOR = "#375362"
+THEME_COLOR = "#375362" #variable for theme colour
 
+class Question: #class number 1
+    # overriding abstract method init = initialise
+    def __init__(self, question: str, correct_answer: str, choices: list,question_category : str):
+        self.question_text = question
+        self.correct_answer = correct_answer
+        self.choices = choices
+        self.question_category = question_category 
+        #This code creates a question with its answer choices and category.
 
+class QuizBrain: #class number 2
 
-def open_general():
-    general_window = tk.Toplevel(root)
-    general_window.title("General Knowledge")
-    general_window.geometry("700x700")
-    general_label = tk.Label(general_window, text="Welcome to the General Knowledge page!", font=("Helvetica", 17))
-    general_label.pack(pady=20)
-    general_text = tk.Label(general_window, text="Read the passage below to help you answer the following questions", font=("Helvetica", 14))
-    general_text.pack(pady=10)
-    general_text = tk.Label(general_window, text=("Geography is all about exploring our world. It looks at the land, weather, and living things,\n as well as how people live on Earth. \n There are two main parts to geography: Physical and Human."))
-    general_text.pack(pady=0, padx=0)
-    general_button = tk.Button(general_window, text="Open", command=general_window_quiz, bg="#FFA07A", fg="white", font=("Helvetica", 12), justify="left")
-    general_button.pack(pady=20)
+    def __init__(self, questions):
+        self.question_no = 0
+        self.score = 0
+        self.questions = questions
+        self.current_question = None
+        self.current_question_category = None
 
-def general_window_quiz():
-    general_window = tk.Toplevel(root)
-    general_window.title("Quiz Knowledge")
-    general_window.geometry("700x700")
-    general_label = tk.Label(general_window, text="QUIZ", font=("Helvetica", 16))
-    general_label.pack(pady=20)
-    general_text = tk.Label(general_window, text="Quiz")
-    general_text.pack(pady=10)
-    general_button = tk.Button(general_window, text="Next", command=general_window_quiz, bg="#FFA07A", fg="white", font=("Helvetica", 12))
-    general_button.pack(pady=20)
+    def has_more_questions(self):
+        """To check if the quiz has more questions"""
+        
+        return self.question_no < len(self.questions)
 
-def open_countries():
-    countries_window = tk.Toplevel(root)
-    countries_window.title("Countries")
-    countries_window.geometry("700x700")
-    countries_label = tk.Label(countries_window, text="Welcome to the Countries page!", font=("Helvetica", 16))
-    countries_label.pack(pady=20)
-    countries_text = tk.Label(countries_window, text="Here you can learn about different countries.")
-    countries_text.pack(pady=10)
-    countries_button = tk.Button(countries_window, text="Close", command=open_countries_quiz, bg="#FFA07A", fg="white", font=("Helvetica", 12))
-    countries_button.pack(pady=20)
+    def next_question(self):
+        """Get the next question by incrementing the question number"""
+        
+        self.current_question = self.questions[self.question_no]
 
-def open_countries_quiz():
-    countries_window = tk.Toplevel(root)
-    countries_window.title("Countries")
-    countries_window.geometry("700x700")
-    countries_label = tk.Label(countries_window, text="Welcome to the Countries page!", font=("Helvetica", 16))
-    countries_label.pack(pady=20)
-    countries_text = tk.Label(countries_window, text="Here you can learn about different countries.")
-    countries_text.pack(pady=10)
-    countries_button = tk.Button(countries_window, text="Close", command=countries_window.destroy, bg="#FFA07A", fg="white", font=("Helvetica", 12))
-    countries_button.pack(pady=20)
+        self.question_no += 1
+        self.current_question_category =self.current_question.question_category
 
+        q_text = self.current_question.question_text
+        return f"Q.{self.question_no}: {q_text}"
 
+    def check_answer(self, user_answer):
+        """Check the user answer against the correct answer and maintain the score"""
+        correct_answer = self.current_question.correct_answer
 
-root = tk.Tk()
-root.title("Geography Introduction")
-root.geometry("700x700")
-root.configure(bg="#ADD8E6")
+        if user_answer.lower() == correct_answer.lower():
+            self.score += 1
+            return True
+        else:
+            return False
 
-intro_label = tk.Label(root, text="Welcome to Geography!", font=("Helvetica", 24), bg="#ADD8E6")
-intro_label.pack(pady=20)
-
-intro_text = tk.Label(root, text="Explore the world with us.", font=("Helvetica", 14), bg="#ADD8E6")
-intro_text.pack(pady=10)
-
-general_button = tk.Button(root, text="General Knowledge", command=open_general, bg="#FFA07A", fg="white", font=("Helvetica", 12))
-general_button.pack(pady=10)
-
-countries_button = tk.Button(root, text="Countries", command=open_countries, bg="#FFA07A", fg="white", font=("Helvetica", 12))
-countries_button.pack(pady=10)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-root.mainloop()
+    def get_score(self):
+        """Get the number of correct answers, wrong answers and score percentage."""
+        
+        wrong = self.question_no - self.score
+        score_percent = int(self.score / self.question_no * 100)
+        return (self.score, wrong, score_percent) 
