@@ -59,3 +59,90 @@ class QuizBrain: #class number 2
         wrong = self.question_no - self.score
         score_percent = int(self.score / self.question_no * 100)
         return (self.score, wrong, score_percent) 
+    
+
+class QuizInterface:
+    def __init__(self, quiz_brain: QuizBrain,  general_window) -> None:
+        self.quiz = quiz_brain
+        general_window.destroy()
+        self.window = Tk()
+        self.window.title("Geography Application")
+        self.window.geometry("720x850")
+        self.holder_list = []
+        # Display Title
+        self.display_title()
+
+
+        # Creating a canvas for question text, and dsiplay question
+        self.canvas = Canvas(width=800, height=250)
+        self.question_text = self.canvas.create_text(350, 125,
+                                                     text="Question here",
+                                                     width=630,
+                                                     fill=THEME_COLOR,
+                                                     font=(
+                                                         'Ariel', 15, 'italic')
+                                                     )
+        self.canvas.pack()
+        #self.canvas.grid(row=2, column=0, columnspan=2, pady=50)
+        
+
+        
+    
+
+
+        self.display_question()
+
+        # Declare a StringVar to store user's answer
+        self.user_answer = StringVar()
+
+
+        q_cat = self.quiz.current_question_category  
+        ############################################
+        if q_cat == 'image': 
+            # Display four options(radio buttons)
+            self.radio_buttons_images()
+
+        else:
+
+            self.opts = self.radio_buttons()
+            self.display_options()
+        ############################################
+
+        # To show whether the answer is correct or wrong
+        self.feedback = Label(self.window, pady=10, font=("ariel", 15, "bold"))
+        self.feedback.place(x=250, y=510)
+
+        # Next and Quit Button
+        self.buttons()
+
+        # Mainloop
+        self.window.mainloop()
+
+
+    def myimage(self, photo):
+        p=Image.open(photo)
+        img=ImageTk.PhotoImage(p)
+        return(img)
+
+    def display_title(self):
+        """To display title"""
+
+        # Title
+        title = Label(self.window, text="iQuiz Application",
+                      width=50, bg="#FFA07A", fg="white", font=("ariel", 20, "bold"))
+
+        # place of the title
+        title.place(x=0, y=2)
+
+    def display_question(self):
+        """To display the question"""
+        for widget in self.holder_list:
+            widget.destroy()
+        q_text = self.quiz.next_question()
+        q_cat = self.quiz.current_question_category  
+        self.canvas.itemconfig(self.question_text, text=q_text)
+
+    def radio_buttons_images(self):
+        """To create four options (radio buttons)"""
+        # position of the first option
+        y_pos = 220
