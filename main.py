@@ -373,18 +373,7 @@ class MainInterface:
         close_button.pack(pady=20)
 
         
-        #p=Image.open("countryflags/austria.png")
-        #img=ImageTk.PhotoImage(p)
-
-        #image = ImageTk.PhotoImage(Image.open(r'austria.png')) 
-
-        #Label(self.window_main,  image=image, compound='center').grid(row=2, column=2, columnspan=2, pady=50)
-        #self.window_main.mainloop()
-
-        # Display it within a label.
-        #label12222 = Label(self.window_main,  image=img, compound="center"  )
-        #label12222.pack(pady=50)
-         #.grid(row=2, column=2, columnspan=2, pady=50)
+       
 
 
 
@@ -473,7 +462,6 @@ class MainInterface:
         self.general_window.geometry("800x800")
         general_label = Label(self.general_window, text="Welcome to the General Knowledge page!", font=("Helvetica", 16))
         general_label.pack(pady=20)
-        #general_text = Label(self.general_window, text="Here we are going to test your General Knowledge Skills.")
         general_text = Label(self.general_window,width=80, text="ere we are going to test your General Knowledge Skills   Lorem Ipsum is simply dummy\n text of the printing and typesetting industry. Lorem Ipsum has been the \n industry standard dummy text ever since the 1500s, when an unknown \n printer took a galley of type and scrambled it to make a type specimen\n  book. It has survived not only five centuries, but also the leap into\n   electronic typesetting, remaining essentially unchanged. It was \n   popularised in the 1960s with the release of Letraset sheets containing\n    Lorem Ipsum passages, and more recently with desktop publishing \n software like Aldus PageMaker including versions of Lorem Ipsum.\n")
         
 
