@@ -15,19 +15,19 @@
           "question":"Which is the flag of Afghanistan?",
           "correct_answer":"countryflags/afghnistan_3.png",
           "incorrect_answers":[
-             "countryflags/australia.png",
-             "countryflags/canada.png",
-             "countryflags/egypt.png"
+             "countryflags/india3.png",
+             "countryflags/indonesia.jpg",
+             "countryflags/jordan.png"
           ]
        },
        {
           "category":"image",
-          "question":"Which silhouette is Italy?",
-          "correct_answer":"countryflags/italy-map1.jpg",
+          "question":"Which is the flag of Poland?",
+          "correct_answer":"countryflags/poland.jpg",
           "incorrect_answers":[
-             "countryflags/africa-map.png",
-             "countryflags/germany-map2.png",
-             "countryflags/australia-map.png"
+             "countryflags/indonesia.jpg",
+             "countryflags/usa.jpg",
+             "countryflags/sudan2.png"
           ]
        },
        {
@@ -35,21 +35,76 @@
           "question":"What is the flag of Canada?",
           "correct_answer":"countryflags/canada.png",
           "incorrect_answers":[
-             "countryflags/australia.png",
-             "countryflags/austria.png",
-             "countryflags/egypt.png"
+             "countryflags/qatar.jpg",
+             "countryflags/kuwait2.jpg",
+             "countryflags/india3.png"
           ]
        },
        {
-          "category":"Other",
+          "category":"image",
           "question":"What country has the longest coastline?",
-          "correct_answer":"Canada",
+          "correct_answer":"countryflags/canada.png",
           "incorrect_answers":[
-             "USA",
-             "Russia",
-             "Australia"
+             "countryflags/kuwait2.jpg",
+             "countryflags/kenya.png",
+             "countryflags/morocco.png"
+          ]
+       },
+       {
+          "category":"image",
+          "question":"Which country is home to the ancient city of Petra",
+          "correct_answer":"countryflags/jordan.png",
+          "incorrect_answers":[
+             "countryflags/india3.png",
+             "countryflags/indonesia.jpg",
+             "countryflags/bangaldesh.jpg"
+          ]
+       },
+       {
+          "category":"image",
+          "question":"What is the world's smallest independent state by both area and population?",
+          "correct_answer":"countryflags/vaticancity.png",
+          "incorrect_answers":[
+             "countryflags/kuwait2.jpg",
+             "countryflags/kenya.png",
+             "countryflags/morocco.png"
+          ]
+       },
+       {
+          "category":"image",
+          "question":"Which country is the most populous in Africa and has Nollywood as its major film industry?",
+          "correct_answer":"countryflags/nigeria.png",
+          "incorrect_answers":[
+             "countryflags/kenya.png",
+             "countryflags/egypt.png",
+             "countryflags/morocco.png"
+          ]
+       },
+       {
+          "category":"image",
+          "question":"Which is the flag of Kuwait?",
+          "correct_answer":"countryflags/kuwait2.jpg",
+          "incorrect_answers":[
+             "countryflags/palestine.jpeg",
+             "countryflags/sudan2.png",
+             "countryflags/jordan.png"
+          ]
+       },
+       {
+          "category":"image",
+          "question":"Which African country has more pyramids than Egypt?",
+          "correct_answer":"countryflags/sudan2.png",
+          "incorrect_answers":[
+             "countryflags/egypt.png",
+             "countryflags/morocco.png",
+             "countryflags/vaticancity.png"
           ]
        }
+ 
+ 
+ 
+ 
+ 
  
     ]
  }

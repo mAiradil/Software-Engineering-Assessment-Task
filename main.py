@@ -59,7 +59,8 @@ class QuizBrain: #class number 2
         wrong = self.question_no - self.score
         score_percent = int(self.score / self.question_no * 100)
         return (self.score, wrong, score_percent) 
-    
+
+
 
 class QuizInterface:
     def __init__(self, quiz_brain: QuizBrain,  general_window) -> None:
@@ -349,3 +350,144 @@ class MainInterface:
  
     def disable_event(self):
        pass
+
+    def display_title(self):
+        #self.window_main.protocol("WM_DELETE_WINDOW", self.disable_event)
+        #self.window_main.resizable(0,0) 
+        #self.window_main.overrideredirect(True)
+        intro_label = Label(self.window_main, text="Welcome to Geography!", font=("Helvetica", 24), bg="#ADD8E6")
+        intro_label.pack(pady=20)
+
+        intro_text = Label(self.window_main, text="Explore the world with us.", font=("Helvetica", 14), bg="#ADD8E6")
+        intro_text.pack(pady=10)
+
+        #general_button = Button(self.window_main, text="General Knowledge", command=self.open_general, bg="#FFA07A", fg="black", font=("Helvetica", 12))
+        general_button = Button(self.window_main, text="General Knowledge", command=self.open_general, bg="#FFA07A", fg="black", font=("Helvetica", 12))
+        general_button.pack(pady=10)
+
+        countries_button = Button(self.window_main, text="Countries", command=self.open_countries, bg="#FFA07A", fg="black", font=("Helvetica", 12))
+        countries_button.pack(pady=10)
+
+
+        close_button = Button(self.window_main, text="Close", command=self.window_main.destroy, bg="#FFA07A", fg="black", font=("Helvetica", 12))
+        close_button.pack(pady=20)
+
+        
+        #p=Image.open("countryflags/austria.png")
+        #img=ImageTk.PhotoImage(p)
+
+        #image = ImageTk.PhotoImage(Image.open(r'austria.png')) 
+
+        #Label(self.window_main,  image=image, compound='center').grid(row=2, column=2, columnspan=2, pady=50)
+        #self.window_main.mainloop()
+
+        # Display it within a label.
+        #label12222 = Label(self.window_main,  image=img, compound="center"  )
+        #label12222.pack(pady=50)
+         #.grid(row=2, column=2, columnspan=2, pady=50)
+
+
+
+    def start_quiz_knowledge(self, general_window):
+        question_json = open('question_knowledge.json')
+        response = json.load(question_json)
+        question_data = response["results"]
+        question_bank = []
+        for question in question_data:
+            choices = []
+            question_category = question["category"]
+            question_text = question["question"]
+            correct_answer = question["correct_answer"]
+            incorrect_answers = question["incorrect_answers"]
+            for ans in incorrect_answers:
+                choices.append(ans)
+            choices.append(correct_answer)
+            shuffle(choices)
+            new_question = Question(question_text, correct_answer, choices, question_category)
+            question_bank.append(new_question)
+
+
+        self.quiz = QuizBrain(question_bank)
+        try:
+            self.window_main.destroy()
+        except:
+            print("An exception occurred")
+
+        QuizInterface(self.quiz,  general_window)
+   
+    def start_quiz_countries(self, country_window):
+        question_json = open('question_countries.json')
+        response = json.load(question_json)
+        question_data = response["results"]
+        question_bank = []
+        for question in question_data:
+            choices = []
+            question_category = question["category"]
+            question_text = html.unescape(question["question"])
+            correct_answer = html.unescape(question["correct_answer"])
+            incorrect_answers = question["incorrect_answers"]
+            category = question["category"]
+            for ans in incorrect_answers:
+                choices.append(html.unescape(ans))
+            choices.append(correct_answer)
+            shuffle(choices)
+            new_question = Question(question_text, correct_answer, choices, question_category)
+            question_bank.append(new_question)
+
+
+        self.quiz = QuizBrain(question_bank)
+        try:
+            self.window_main.destroy()
+        except:
+            print("An exception occurred")
+
+        QuizInterface(self.quiz,  country_window)      
+ 
+    def open_countries(self):
+        self.countrywindow = Tk()
+        self.countrywindow.title("Countries")
+        self.countrywindow.geometry("800x800")
+        countries_label = Label(self.countrywindow,  text="Welcome to the Countries page!", font=("Helvetica", 16))
+        
+        countries_label.pack(pady=20)
+
+        countries_text = Label(self.countrywindow,width=80, text="Here you can learn about different countries.   Lorem Ipsum is simply dummy\n text of the printing and typesetting industry. Lorem Ipsum has been the \n industry standard dummy text ever since the 1500s, when an unknown \n printer took a galley of type and scrambled it to make a type specimen\n  book. It has survived not only five centuries, but also the leap into\n   electronic typesetting, remaining essentially unchanged. It was \n   popularised in the 1960s with the release of Letraset sheets containing\n    Lorem Ipsum passages, and more recently with desktop publishing \n software like Aldus PageMaker including versions of Lorem Ipsum.\n")
+        
+        countries_text.pack(pady=10)
+         
+
+
+
+        start_quiz_button_country = Button(self.countrywindow, text="Start Quiz", command=lambda: self.start_quiz_countries(  self.countrywindow), bg="#FFA07A", fg="black", font=("Helvetica", 12))
+        start_quiz_button_country.pack(pady=20)
+
+        close_button_country = Button(self.countrywindow, text="Close Screen", command=self.countrywindow.destroy, bg="#FFA07A", fg="black", font=("Helvetica", 12))
+        close_button_country.pack(pady=20)
+        
+        self.countrywindow.mainloop()
+
+
+    def open_general(self):
+        self.general_window = Tk()
+        self.general_window.title("General Knowledge")
+        self.general_window.geometry("800x800")
+        general_label = Label(self.general_window, text="Welcome to the General Knowledge page!", font=("Helvetica", 16))
+        general_label.pack(pady=20)
+        #general_text = Label(self.general_window, text="Here we are going to test your General Knowledge Skills.")
+        general_text = Label(self.general_window,width=80, text="ere we are going to test your General Knowledge Skills   Lorem Ipsum is simply dummy\n text of the printing and typesetting industry. Lorem Ipsum has been the \n industry standard dummy text ever since the 1500s, when an unknown \n printer took a galley of type and scrambled it to make a type specimen\n  book. It has survived not only five centuries, but also the leap into\n   electronic typesetting, remaining essentially unchanged. It was \n   popularised in the 1960s with the release of Letraset sheets containing\n    Lorem Ipsum passages, and more recently with desktop publishing \n software like Aldus PageMaker including versions of Lorem Ipsum.\n")
+        
+
+        general_text.pack(pady=10)
+ 
+        start_quiz_button = Button(self.general_window, text="Start Quiz", command=lambda: self.start_quiz_knowledge(  self.general_window), bg="#FFA07A", fg="black", font=("Helvetica", 12))
+        start_quiz_button.pack(pady=20)
+
+        close_button = Button(self.general_window, text="Close Screen", command=self.general_window.destroy, bg="#FFA07A", fg="black", font=("Helvetica", 12))
+        close_button.pack(pady=20)
+        
+        self.general_window.mainloop()
+
+
+
+ 
+main_ui  = MainInterface()
