@@ -18,7 +18,7 @@ class Question: #class number 1
         self.question_category = question_category 
         #This code creates a question with its answer choices and category.
 
-class QuizBrain: #class number 2
+class QuizQuestion: #class number 2
 
     def __init__(self, questions):
         self.question_no = 0
@@ -28,12 +28,12 @@ class QuizBrain: #class number 2
         self.current_question_category = None
 
     def has_more_questions(self):
-        """To check if the quiz has more questions"""
+        # To check if the quiz has more questions"""
         
         return self.question_no < len(self.questions)
 
     def next_question(self):
-        """Get the next question by incrementing the question number"""
+        # Get the next question by incrementing the question number"""
         
         self.current_question = self.questions[self.question_no]
 
@@ -44,7 +44,7 @@ class QuizBrain: #class number 2
         return f"Q.{self.question_no}: {q_text}"
 
     def check_answer(self, user_answer):
-        """Check the user answer against the correct answer and maintain the score"""
+       #Check the user answer against the correct answer and maintain the score"""
         correct_answer = self.current_question.correct_answer
 
         if user_answer.lower() == correct_answer.lower():
@@ -54,7 +54,7 @@ class QuizBrain: #class number 2
             return False
 
     def get_score(self):
-        """Get the number of correct answers, wrong answers and score percentage."""
+        #Get the number of correct answers, wrong answers and score percentage."""
         
         wrong = self.question_no - self.score
         score_percent = int(self.score / self.question_no * 100)
@@ -62,13 +62,13 @@ class QuizBrain: #class number 2
 
 
 
-class QuizInterface:
-    def __init__(self, quiz_brain: QuizBrain,  general_window) -> None:
+class QuizInterface: #class number #3
+    def __init__(self, quiz_brain: QuizQuestion,  general_window) -> None:
         self.quiz = quiz_brain
         general_window.destroy()
         self.window = Tk()
         self.window.title("Geography Application")
-        self.window.geometry("720x850")
+        self.window.geometry("750x800")
         self.holder_list = []
         # Display Title
         self.display_title()
@@ -85,12 +85,7 @@ class QuizInterface:
                                                      )
         self.canvas.pack()
         #self.canvas.grid(row=2, column=0, columnspan=2, pady=50)
-        
-
-        
-    
-
-
+     
         self.display_question()
 
         # Declare a StringVar to store user's answer
@@ -126,7 +121,7 @@ class QuizInterface:
         return(img)
 
     def display_title(self):
-        """To display title"""
+        # To display title"""
 
         # Title
         title = Label(self.window, text="iQuiz Application",
@@ -136,7 +131,7 @@ class QuizInterface:
         title.place(x=0, y=2)
 
     def display_question(self):
-        """To display the question"""
+        # To display the question"""
         for widget in self.holder_list:
             widget.destroy()
         q_text = self.quiz.next_question()
@@ -144,7 +139,7 @@ class QuizInterface:
         self.canvas.itemconfig(self.question_text, text=q_text)
 
     def radio_buttons_images(self):
-        """To create four options (radio buttons)"""
+        # To create four options (radio buttons)
         # position of the first option
         y_pos = 220
 
@@ -170,7 +165,7 @@ class QuizInterface:
 
 
     def radio_buttons(self):
-        """To create four options (radio buttons)"""
+        # To create four options (radio buttons)
 
         # initialize the list with an empty list of options
         choice_list = []
@@ -198,7 +193,7 @@ class QuizInterface:
         return choice_list
 
     def display_options(self):
-        """To display four options"""
+        # To display four options"""
 
         val = 0
 
@@ -207,13 +202,9 @@ class QuizInterface:
 
         # looping over the options to be displayed for the
         # text of the radio buttons.
-        for option in self.quiz.current_question.choices:
-            self.opts[val]['text'] = option
-            self.opts[val]['value'] = option
-            val += 1
-
+       
     def next_btn(self):
-        """To show feedback for each answer and keep checking for more questions"""
+        # To show feedback for each answer and keep checking for more questions"""
 
         try:
             self.label_image.destroy()
@@ -226,24 +217,18 @@ class QuizInterface:
 
         # Check if the answer is correct
         if self.quiz.check_answer(self.user_answer.get()):
-            self.feedback["fg"] = "#FFA07A"
+            self.feedback["fg"] = "green"
             self.feedback["text"] = 'Correct answer! \U0001F44D'
         else:
             if quest_cat == 'image':
                  
         
               
-                self.feedback['fg'] = 'lightblue'
+                self.feedback['fg'] = 'red'
                 self.feedback['text'] = ('\u274E Oops! \n'
                                          f'The right answer is:  ')
                  
-                """
-                photo = ImageTk.PhotoImage(Image.open(self.quiz.current_question.correct_answer)) 
-                 
-                self.label_image = Label(image=photo)
-                self.label_image.image = photo # keep a reference!
-                self.label_image.pack()
-                """
+              
                 photo = ImageTk.PhotoImage(Image.open(self.quiz.current_question.correct_answer)) 
                  
                 self.label_image = Label(image=photo ,bg="purple")
@@ -254,7 +239,7 @@ class QuizInterface:
 
 
             else:    
-                self.feedback['fg'] = 'lightblue'
+                self.feedback['fg'] = 'red'
                 self.feedback['text'] = ('\u274E Oops! \n'
                                          f'The right answer is: {self.quiz.current_question.correct_answer}')
 
@@ -264,7 +249,7 @@ class QuizInterface:
             self.display_question()
             q_cat = self.quiz.current_question_category 
     
-            ############################################
+            
             if q_cat == 'image': 
                 # Display four options(radio buttons)
                 self.radio_buttons_images()
@@ -276,10 +261,7 @@ class QuizInterface:
         else:
             # if no more questions, then it displays the score
             self.display_result()
-            # destroys the self.window
-            #self.window.destroy()
-            #MainInterface()
-            
+     
     def quit_btn(self):
 
         self.window.destroy()
@@ -287,7 +269,7 @@ class QuizInterface:
 
 
     def buttons(self):
-        """To show next button and quit button"""
+         #To show next button and quit button"""
 
         # The first button is the Next button to move to the
         # next Question
@@ -307,7 +289,7 @@ class QuizInterface:
         quit_button.place(x=615, y=50)
 
     def display_result(self):
-        """To display the result using messagebox"""
+        #To display the result using messagebox"""
         correct, wrong, score_percent = self.quiz.get_score()
 
         correct = f"Correct: {correct}"
@@ -326,7 +308,7 @@ class QuizInterface:
         self.feedback1 = Label(self.window, pady=10, font=("ariel", 15, "bold"))
         self.feedback1.place(x=300, y=380)
 
-        self.feedback1['fg'] = '#FFA07A'
+        self.feedback1['fg'] = 'red'
         self.feedback1['text'] = ( f'{result}\n{correct}\n{wrong}')
 
         self.canvas.itemconfig(self.question_text, text=' ')
@@ -352,28 +334,25 @@ class MainInterface:
        pass
 
     def display_title(self):
-        #self.window_main.protocol("WM_DELETE_WINDOW", self.disable_event)
-        #self.window_main.resizable(0,0) 
-        #self.window_main.overrideredirect(True)
         intro_label = Label(self.window_main, text="Welcome to Geography!", font=("Helvetica", 24), bg="#ADD8E6")
         intro_label.pack(pady=20)
 
         intro_text = Label(self.window_main, text="Explore the world with us.", font=("Helvetica", 14), bg="#ADD8E6")
         intro_text.pack(pady=10)
 
-        #general_button = Button(self.window_main, text="General Knowledge", command=self.open_general, bg="#FFA07A", fg="black", font=("Helvetica", 12))
         general_button = Button(self.window_main, text="General Knowledge", command=self.open_general, bg="#FFA07A", fg="black", font=("Helvetica", 12))
         general_button.pack(pady=10)
 
         countries_button = Button(self.window_main, text="Countries", command=self.open_countries, bg="#FFA07A", fg="black", font=("Helvetica", 12))
         countries_button.pack(pady=10)
 
-
         close_button = Button(self.window_main, text="Close", command=self.window_main.destroy, bg="#FFA07A", fg="black", font=("Helvetica", 12))
         close_button.pack(pady=20)
 
         
-       
+
+
+
 
 
 
@@ -396,7 +375,7 @@ class MainInterface:
             question_bank.append(new_question)
 
 
-        self.quiz = QuizBrain(question_bank)
+        self.quiz = QuizQuestion(question_bank)
         try:
             self.window_main.destroy()
         except:
@@ -424,7 +403,7 @@ class MainInterface:
             question_bank.append(new_question)
 
 
-        self.quiz = QuizBrain(question_bank)
+        self.quiz = QuizQuestion(question_bank)
         try:
             self.window_main.destroy()
         except:
@@ -440,7 +419,7 @@ class MainInterface:
         
         countries_label.pack(pady=20)
 
-        countries_text = Label(self.countrywindow,width=80, text="Here you can learn about different countries.   Lorem Ipsum is simply dummy\n text of the printing and typesetting industry. Lorem Ipsum has been the \n industry standard dummy text ever since the 1500s, when an unknown \n printer took a galley of type and scrambled it to make a type specimen\n  book. It has survived not only five centuries, but also the leap into\n   electronic typesetting, remaining essentially unchanged. It was \n   popularised in the 1960s with the release of Letraset sheets containing\n    Lorem Ipsum passages, and more recently with desktop publishing \n software like Aldus PageMaker including versions of Lorem Ipsum.\n")
+        countries_text = Label(self.countrywindow,width=80, text="Countries around the world have unique features that make them special. \n For instance, Canada is known for its vast landscapes and cold winters, \n while Brazil is famous for its Amazon rainforest and vibrant Carnival festival. \n Japan blends ancient traditions with cutting-edge technology, \n and Australia is renowned for its diverse wildlife and the Great Barrier Reef. \n Each country has its own culture, geography, \n and landmarks that contribute to our global diversity.")
         
         countries_text.pack(pady=10)
          
@@ -462,7 +441,7 @@ class MainInterface:
         self.general_window.geometry("800x800")
         general_label = Label(self.general_window, text="Welcome to the General Knowledge page!", font=("Helvetica", 16))
         general_label.pack(pady=20)
-        general_text = Label(self.general_window,width=80, text="ere we are going to test your General Knowledge Skills   Lorem Ipsum is simply dummy\n text of the printing and typesetting industry. Lorem Ipsum has been the \n industry standard dummy text ever since the 1500s, when an unknown \n printer took a galley of type and scrambled it to make a type specimen\n  book. It has survived not only five centuries, but also the leap into\n   electronic typesetting, remaining essentially unchanged. It was \n   popularised in the 1960s with the release of Letraset sheets containing\n    Lorem Ipsum passages, and more recently with desktop publishing \n software like Aldus PageMaker including versions of Lorem Ipsum.\n")
+        general_text = Label(self.general_window,width=80, text="Geography gives us a glimpse into the fascinating and diverse features of our world. \n For example, did you know that the Antarctic Desert is actually the largest desert on Earth? \n Similarly, the vast Pacific Ocean holds the title of the biggest ocean. When it comes to land area, \n Russia is the largest country.  The Red Sea plays an important role by separating Saudi Arabia from Africa.\n  Interestingly, Australia is unique because it is both a country and a continent. Another fascinating fact is \n that Angel Falls is recognised as the tallest waterfall in the world.\n Italy stands out with the  most UNESCO World Heritage Sites.  \n The Kalahari Desert spans across Botswana and parts of Namibia and South Africa. \n New Guinea is known as the world's second-largest island by land area. \n Lastly, Antananarivo is the capital of Madagascar, which is famous for being the largest producer of vanilla. \n These intriguing facts help us appreciate the incredible variety and scale of our planet.")
         
 
         general_text.pack(pady=10)

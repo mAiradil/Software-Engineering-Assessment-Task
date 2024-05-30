@@ -17,7 +17,7 @@
           "incorrect_answers":[
              "countryflags/india3.png",
              "countryflags/indonesia.jpg",
-             "countryflags/jordan.png"
+             "countryflags/jordan2.png"
           ]
        },
        {
@@ -46,14 +46,14 @@
           "correct_answer":"countryflags/canada.png",
           "incorrect_answers":[
              "countryflags/kuwait2.jpg",
-             "countryflags/kenya.png",
-             "countryflags/morocco.png"
+             "countryflags/kenya4.png",
+             "countryflags/morocco4.png"
           ]
        },
        {
           "category":"image",
           "question":"Which country is home to the ancient city of Petra",
-          "correct_answer":"countryflags/jordan.png",
+          "correct_answer":"countryflags/jordan2.png",
           "incorrect_answers":[
              "countryflags/india3.png",
              "countryflags/indonesia.jpg",
@@ -66,8 +66,8 @@
           "correct_answer":"countryflags/vaticancity.png",
           "incorrect_answers":[
              "countryflags/kuwait2.jpg",
-             "countryflags/kenya.png",
-             "countryflags/morocco.png"
+             "countryflags/kenya4.png",
+             "countryflags/morocco4.png"
           ]
        },
        {
@@ -75,9 +75,9 @@
           "question":"Which country is the most populous in Africa and has Nollywood as its major film industry?",
           "correct_answer":"countryflags/nigeria.png",
           "incorrect_answers":[
-             "countryflags/kenya.png",
+             "countryflags/kenya4.png",
              "countryflags/egypt.png",
-             "countryflags/morocco.png"
+             "countryflags/morocco3.png"
           ]
        },
        {
@@ -87,7 +87,7 @@
           "incorrect_answers":[
              "countryflags/palestine.jpeg",
              "countryflags/sudan2.png",
-             "countryflags/jordan.png"
+             "countryflags/jordan2.png"
           ]
        },
        {
@@ -96,7 +96,7 @@
           "correct_answer":"countryflags/sudan2.png",
           "incorrect_answers":[
              "countryflags/egypt.png",
-             "countryflags/morocco.png",
+             "countryflags/morocco4.png",
              "countryflags/vaticancity.png"
           ]
        }
